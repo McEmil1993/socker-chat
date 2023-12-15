@@ -13,21 +13,22 @@ use App\Http\Controllers\MessageController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::get('/socket-io', function () {
 //     return view('socket-client');
 // });
 
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/socket-io', [MessageController::class, 'index'])->name('socket-io');
+Route::get('/', [MessageController::class, 'index'])->name('home');
+Route::get('/home', [MessageController::class, 'index'])->name('home');
 Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+Route::post('/save-cropped-image', [MessageController::class, 'upload'])->name('upload');

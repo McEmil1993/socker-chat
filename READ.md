@@ -32,9 +32,13 @@ class SocketServer {
     this.io.on('connection', (socket) => {
       console.log('A user connected');
 
+      socket.on('typing', (data) => {
+        console.log('typing:', data);
+        socket.broadcast.emit('typing', { user: data.user, isTyping: data.isTyping ,user_id:  data.user_id, image_name:data.image_name});
+      });
+
       socket.on('message', (data) => {
         console.log('Received message:', data);
-        // Broadcast the received message to all connected clients
         this.io.emit('message', data);
       });
 
